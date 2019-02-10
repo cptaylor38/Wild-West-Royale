@@ -1,0 +1,97 @@
+body
+{
+    background-color: orange;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    
+}
+
+#game
+{
+    margin: 0px auto;
+    padding: 0;
+    width: 100%;
+    
+    
+}
+
+
+
+#charSelect
+{
+    background-color: yellow;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+
+#charButtons
+{
+    height: 200px;
+    border-radius: 50%;
+    
+
+    
+    
+}
+
+#charButtons button
+{
+    background-color: purple;
+    height: 200px;
+    width: 200px;
+    margin: auto;
+    background-size: 200px 200px;
+    background-repeat: no-repeat;
+    
+    
+
+    
+}
+
+#charButtons button label
+{
+    opacity: .8;
+    color: yellow;
+    position: relative;
+    font-size: 50px;
+    font-weight: bolder;
+    margin-top: 135px;
+}
+
+#empty
+{
+    
+    background-color: black;
+}
+
+#teams .col-lg-2
+{
+    display: block;
+    height: 200px;
+    width: 100%;
+    background-color: white;
+    float: left;
+    justify-content: center;
+}
+
+#teams .col-lg-2 .row
+{
+    justify-content: center;
+}
+
+#match-up
+{
+    height: auto;
+    position: absolute;
+    bottom: 10px;
+}
+
+#playerHP
+{
+    z-index: 100;
+}
+
+
+
