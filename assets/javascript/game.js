@@ -106,7 +106,6 @@ $("#play").on("click", function () {  //calling play function at play button onc
 
 
 $(document).on("click", '.button', function () {
-    console.log(enemyCount);
     if ($(this).attr("data-index") == 0) {
         if (playerCount === 0) {
             characterArray[1].isEnemy = true;
@@ -195,41 +194,56 @@ $(document).on("click", '.button', function () {
 
 })
 
-playerSetup = function (player) {
+playerSetup = function (playerSelected) {
     $playerHP = $("<label>").attr({
         'id': 'playerHP'
     })
     $playerImage = $('<img />').attr({
         'id': 'playerImage',
-        'src': player.imgFile,
+        'src': playerSelected.imgFile,
         'width': '200px',
         'height': '200px'
     })
-    $playerHP.text(player.HP);
+    $playerHP.text(playerSelected.HP);
     $playerImage.append($playerHP); //doesn't seem to be working
     $("#player").append($playerImage);
     playerCount++;
+    player = playerSelected;
+
+
+    $attack = $('<button>').attr({
+        'id': 'attack'
+    })
+    $attack.text("Attack!");
+    $("#battlefield").append($attack);
+
+
+
     return player;
+
 }
 
-enemySetup = function (enemy) {
-    console.log(enemy);
+enemySetup = function (enemySelected) {
     $enemyHP = $("<label>").attr({
         'id': 'enemyHP'
     })
     $enemyImage = $('<img />').attr({
         'id': 'enemyImage',
-        'src': enemy.imgFile,
+        'src': enemySelected.imgFile,
         'width': '200px',
         'height': '200px'
     })
-    $enemyHP.text(enemy.HP);
+    $enemyHP.text(enemySelected.HP);
     $enemyImage.append($enemyHP); //doesn't seem to be working
     $("#enemy").append($enemyImage);
     enemyCount++;
+    enemy = enemySelected;
     return enemy;
 
-
 }
+
+$(document).on("click", '#attack', function () {
+    console.log("attack");
+})
 
 
