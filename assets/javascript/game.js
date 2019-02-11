@@ -44,7 +44,8 @@ var player;
 var enemy;
 var $character;
 var playerSelected = false;
-var enemySelected = false;
+var enemyCount = 0;
+
 
 
 
@@ -100,13 +101,11 @@ $("#play").on("click", function () {  //calling play function at play button onc
         $character.append($hpLabel);
         $("#charButtons").append($character);
     }
-    console.log(enemySelected);
     $(this).remove();
 })
 
 
 $(document).on("click", '.button', function () {
-    console.log(enemySelected);
     if ($(this).attr("data-index") == 0) {
         if (playerSelected === false) {
             player = characterArray[0];
@@ -116,11 +115,25 @@ $(document).on("click", '.button', function () {
             $(this).remove();
             playerSetup(player);
         }
-        else if (playerSelected === true && enemySelected === false) {
+        else if (playerSelected === true && enemyCount === 0) {
             enemy = characterArray[0];
+            enemyCount++;
             enemySetup(enemy);
             $(this).remove();
         }
+        else if (playerSelected === true && enemyCount === 1) {
+            enemy = characterArray[0];
+            enemyCount++;
+            enemySetup(enemy);
+            $(this).remove();
+        }
+        else if (playerSelected === true && enemyCount === 2) {
+            enemy = characterArray[0];
+            enemycount++;
+            enemySetup(enemy);
+            $(this).remove();
+        }
+
     }
     else if ($(this).attr("data-index") == 1) {
         if (playerSelected === false) {
@@ -131,8 +144,20 @@ $(document).on("click", '.button', function () {
             $(this).remove();
             playerSetup(player);
         }
-        else if (playerSelected = true && enemySelected === false) {
+        else if (playerSelected = true && enemyCount === 0) {
             enemy = characterArray[1];
+            enemyCount++;
+            enemySetup(enemy);
+            $(this).remove();
+        }
+        else if (playerSelected === true && enemyCount === 1) {
+            enemy = characterArray[0];
+            enemyCount++;
+            enemySetup(enemy);
+            $(this).remove();
+        }
+        else if (playerSelected === true && enemyCount === 2) {
+            enemy = characterArray[0];
             enemySetup(enemy);
             $(this).remove();
         }
@@ -146,8 +171,21 @@ $(document).on("click", '.button', function () {
             $(this).remove();
             playerSetup(player);
         }
-        else if (playerSelected === true && enemySelected === false) {
+        else if (playerSelected === true && enemyCount === 0) {
             enemy = characterArray[2];
+            enemyCount++;
+            enemySetup(enemy);
+            $(this).remove();
+        }
+        else if (playerSelected === true && enemyCount === 1) {
+            enemy = characterArray[0];
+            enemyCount++;
+            enemySetup(enemy);
+            $(this).remove();
+        }
+        else if (playerSelected === true && enemyCount === 2) {
+            enemy = characterArray[0];
+            enemyCount++;
             enemySetup(enemy);
             $(this).remove();
         }
@@ -161,8 +199,21 @@ $(document).on("click", '.button', function () {
             $(this).remove();
             playerSetup(player);
         }
-        else if (playerSelected === true && enemySelected === false) {
+        else if (playerSelected === true && enemyCount === 0) {
             enemy = characterArray[3];
+            enemyCount++;
+            enemySetup(enemy);
+            $(this).remove();
+        }
+        else if (playerSelected === true && enemyCount === 1) {
+            enemy = characterArray[0];
+            enemyCount++;
+            enemySetup(enemy);
+            $(this).remove();
+        }
+        else if (playerSelected === true && enemyCount === 2) {
+            enemy = characterArray[0];
+            enemyCount++;
             enemySetup(enemy);
             $(this).remove();
         }
@@ -181,7 +232,7 @@ playerSetup = function (player) {
         'height': '200px'
     })
     $playerHP.text(player.HP);
-    $playerImage.append($playerHP);
+    $playerImage.append($playerHP); //doesn't seem to be working
     $("#player").append($playerImage);
     playerSelected = true;
 }
@@ -198,9 +249,9 @@ enemySetup = function (enemy) {
         'height': '200px'
     })
     $enemyHP.text(enemy.HP);
-    $enemyImage.append($enemyHP);
+    $enemyImage.append($enemyHP); //doesn't seem to be working
     $("#enemy").append($enemyImage);
-    enemySelected = true;
+
 }
 
 
