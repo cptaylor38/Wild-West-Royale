@@ -4,7 +4,6 @@ body
     padding: 0px;
     height: 100%;
     width: 100%;
-    
 }
 
 #game
@@ -12,28 +11,33 @@ body
     margin: 0px auto;
     padding: 0;
     width: 100%;
-    
+}
+#match-up
+{
+    height: auto;
+    position: absolute;
+    bottom: 10px;
+}
+
+#middleofpage
+{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    height: 200px;
+    justify-content: center;
     
 }
 
-
-
-#charSelect
+#play
 {
-    background-color: yellow;
-    align-items: center;
-    justify-content: center;
     height: 50px;
+    width: 200px;
 }
 
 #charButtons
 {
     height: 200px;
     border-radius: 50%;
-    
-
-    
-    
 }
 
 #charButtons button
@@ -44,10 +48,6 @@ body
     margin: auto;
     background-size: 200px 200px;
     background-repeat: no-repeat;
-    
-    
-
-    
 }
 
 #charButtons button label
@@ -60,7 +60,24 @@ body
     margin-top: 135px;
 }
 
-#empty
+#playerHP
+{
+    position: relative;
+}
+
+
+
+/* #charSelect
+{
+    background-color: yellow;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+} */
+
+
+
+/* #empty
 {
     
     background-color: black;
@@ -79,19 +96,9 @@ body
 #teams .col-lg-2 .row
 {
     justify-content: center;
-}
+} */
 
-#match-up
-{
-    height: auto;
-    position: absolute;
-    bottom: 10px;
-}
 
-#playerHP
-{
-    z-index: 100;
-}
 
 
 

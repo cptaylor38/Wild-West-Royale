@@ -41,8 +41,11 @@
 
 
 var player;
-var opponent;
-var $hpLabel;
+var enemy;
+var $character;
+var playerSelected = false;
+var enemySelected = false;
+
 
 
 
@@ -82,75 +85,122 @@ var characterArray = [
 
 
 $("#play").on("click", function () {  //calling play function at play button onclick event
-
-
     for (var i = 0; i < characterArray.length; i++) {
         $character = $("<button>");
         $hpLabel = $("<label>");
 
         $character.addClass("button");
-        $character.attr("data-index", i);
+        $character.attr({
+            'data-index': i,
+            'id': characterArray[i]
+        });
         $character.css('width:100px', 'height:100px')
         $character.css("background-image", "url('" + characterArray[i].imgFile + "')");
         $hpLabel.text(characterArray[i].HP);
         $character.append($hpLabel);
         $("#charButtons").append($character);
-
-
     }
+    console.log(enemySelected);
+    $(this).remove();
+})
 
-    $(".button").on("click", function () {
-        console.log("anything");
-        if ($(this).attr("data-index") == 0) {
+
+$(document).on("click", '.button', function () {
+    console.log(enemySelected);
+    if ($(this).attr("data-index") == 0) {
+        if (playerSelected === false) {
             player = characterArray[0];
             characterArray[1].isEnemy = true;
             characterArray[2].isEnemy = true;
             characterArray[3].isEnemy = true;
-            $("#charButtons").empty();
-
+            $(this).remove();
+            playerSetup(player);
         }
-        else if ($(this).attr("data-index") == 1) {
+        else if (playerSelected === true && enemySelected === false) {
+            enemy = characterArray[0];
+            enemySetup(enemy);
+            $(this).remove();
+        }
+    }
+    else if ($(this).attr("data-index") == 1) {
+        if (playerSelected === false) {
             player = characterArray[1];
             characterArray[0].isEnemy = true;
             characterArray[2].isEnemy = true;
             characterArray[3].isEnemy = true;
-            $("#charButtons").empty();
-
-
+            $(this).remove();
+            playerSetup(player);
         }
-        else if ($(this).attr("data-index") == 2) {
+        else if (playerSelected = true && enemySelected === false) {
+            enemy = characterArray[1];
+            enemySetup(enemy);
+            $(this).remove();
+        }
+    }
+    else if ($(this).attr("data-index") == 2) {
+        if (playerSelected === false) {
             player = characterArray[2];
             characterArray[0].isEnemy = true;
             characterArray[1].isEnemy = true;
             characterArray[3].isEnemy = true;
-            $("#charButtons").empty();
-
-
+            $(this).remove();
+            playerSetup(player);
         }
-        else {
+        else if (playerSelected === true && enemySelected === false) {
+            enemy = characterArray[2];
+            enemySetup(enemy);
+            $(this).remove();
+        }
+    }
+    else {
+        if (playerSelected === false) {
             player = characterArray[3];
             characterArray[0].isEnemy = true;
             characterArray[1].isEnemy = true;
             characterArray[2].isEnemy = true;
-            $("#charButtons").empty();
-
+            $(this).remove();
+            playerSetup(player);
         }
-
-        console.log(player);
-        $playerHP = $("<label>").attr({
-            'id': 'playerHP'
-        })
-        $playerImage = $('<img />').attr({
-            'id': 'playerImage',
-            'src': player.imgFile,
-            'width': '200px',
-            'height': '200px'
-        })
-        $playerHP.text(player.HP);
-        $playerImage.append($playerHP);
-        $("#player").append($playerImage);
-    })
-
+        else if (playerSelected === true && enemySelected === false) {
+            enemy = characterArray[3];
+            enemySetup(enemy);
+            $(this).remove();
+        }
+    }
 
 })
+
+playerSetup = function (player) {
+    $playerHP = $("<label>").attr({
+        'id': 'playerHP'
+    })
+    $playerImage = $('<img />').attr({
+        'id': 'playerImage',
+        'src': player.imgFile,
+        'width': '200px',
+        'height': '200px'
+    })
+    $playerHP.text(player.HP);
+    $playerImage.append($playerHP);
+    $("#player").append($playerImage);
+    playerSelected = true;
+}
+
+enemySetup = function (enemy) {
+    console.log(enemy);
+    $enemyHP = $("<label>").attr({
+        'id': 'enemyHP'
+    })
+    $enemyImage = $('<img />').attr({
+        'id': 'enemyImage',
+        'src': enemy.imgFile,
+        'width': '200px',
+        'height': '200px'
+    })
+    $enemyHP.text(enemy.HP);
+    $enemyImage.append($enemyHP);
+    $("#enemy").append($enemyImage);
+    enemySelected = true;
+}
+
 
