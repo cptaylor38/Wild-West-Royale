@@ -43,7 +43,7 @@
 var player;
 var enemy;
 var $character;
-var playerSelected = false;
+var playerCount = 0;
 var enemyCount = 0;
 
 
@@ -106,115 +106,89 @@ $("#play").on("click", function () {  //calling play function at play button onc
 
 
 $(document).on("click", '.button', function () {
+    console.log(enemyCount);
     if ($(this).attr("data-index") == 0) {
-        if (playerSelected === false) {
-            player = characterArray[0];
+        if (playerCount === 0) {
             characterArray[1].isEnemy = true;
             characterArray[2].isEnemy = true;
             characterArray[3].isEnemy = true;
             $(this).remove();
-            playerSetup(player);
+            playerSetup(characterArray[0]);
         }
-        else if (playerSelected === true && enemyCount === 0) {
-            enemy = characterArray[0];
-            enemyCount++;
-            enemySetup(enemy);
+        else if (playerCount === 1 && enemyCount === 0) {
+            enemySetup(characterArray[0]);
             $(this).remove();
         }
-        else if (playerSelected === true && enemyCount === 1) {
-            enemy = characterArray[0];
-            enemyCount++;
-            enemySetup(enemy);
+        else if (playerCount === 1 && enemyCount === 1) {
+            enemySetup(characterArray[0]);
             $(this).remove();
         }
-        else if (playerSelected === true && enemyCount === 2) {
-            enemy = characterArray[0];
-            enemycount++;
-            enemySetup(enemy);
+        else if (playerCount === 1 && enemyCount === 2) {
+            enemySetup(characterArray[0]);
             $(this).remove();
         }
 
     }
     else if ($(this).attr("data-index") == 1) {
-        if (playerSelected === false) {
-            player = characterArray[1];
+        if (playerCount === 0) {
             characterArray[0].isEnemy = true;
             characterArray[2].isEnemy = true;
             characterArray[3].isEnemy = true;
             $(this).remove();
-            playerSetup(player);
+            playerSetup(characterArray[1]);
         }
         else if (playerSelected = true && enemyCount === 0) {
-            enemy = characterArray[1];
-            enemyCount++;
-            enemySetup(enemy);
+            enemySetup(characterArray[1]);
             $(this).remove();
         }
-        else if (playerSelected === true && enemyCount === 1) {
-            enemy = characterArray[0];
-            enemyCount++;
-            enemySetup(enemy);
+        else if (playerCount === 1 && enemyCount === 1) {
+            enemySetup(characterArray[1]);
             $(this).remove();
         }
-        else if (playerSelected === true && enemyCount === 2) {
-            enemy = characterArray[0];
-            enemySetup(enemy);
+        else if (playerCount === 1 && enemyCount === 2) {
+            enemySetup(characterArray[1]);
             $(this).remove();
         }
     }
     else if ($(this).attr("data-index") == 2) {
-        if (playerSelected === false) {
-            player = characterArray[2];
+        if (playerCount === 0) {
             characterArray[0].isEnemy = true;
             characterArray[1].isEnemy = true;
             characterArray[3].isEnemy = true;
             $(this).remove();
-            playerSetup(player);
+            playerSetup(characterArray[2]);
         }
-        else if (playerSelected === true && enemyCount === 0) {
-            enemy = characterArray[2];
-            enemyCount++;
-            enemySetup(enemy);
+        else if (playerCount === 1 && enemyCount === 0) {
+            enemySetup(characterArray[2]);
             $(this).remove();
         }
-        else if (playerSelected === true && enemyCount === 1) {
-            enemy = characterArray[0];
-            enemyCount++;
-            enemySetup(enemy);
+        else if (playerCount === 1 && enemyCount === 1) {
+            enemySetup(characterArray[2]);
             $(this).remove();
         }
-        else if (playerSelected === true && enemyCount === 2) {
-            enemy = characterArray[0];
-            enemyCount++;
-            enemySetup(enemy);
+        else if (playerCount === 1 && enemyCount === 2) {
+            enemySetup(characterArray[2]);
             $(this).remove();
         }
     }
     else {
-        if (playerSelected === false) {
-            player = characterArray[3];
+        if (playerCount === 0) {
             characterArray[0].isEnemy = true;
             characterArray[1].isEnemy = true;
             characterArray[2].isEnemy = true;
             $(this).remove();
-            playerSetup(player);
+            playerSetup(characterArray[3]);
         }
-        else if (playerSelected === true && enemyCount === 0) {
-            enemy = characterArray[3];
-            enemyCount++;
-            enemySetup(enemy);
+        else if (playerCount === 1 && enemyCount === 0) {
+            enemySetup(characterArray[3]);
             $(this).remove();
         }
-        else if (playerSelected === true && enemyCount === 1) {
-            enemy = characterArray[0];
-            enemyCount++;
-            enemySetup(enemy);
+        else if (playerCount === 1 && enemyCount === 1) {
+            enemySetup(characterArray[3]);
             $(this).remove();
         }
-        else if (playerSelected === true && enemyCount === 2) {
-            enemy = characterArray[0];
-            enemyCount++;
-            enemySetup(enemy);
+        else if (playerCount === 1 && enemyCount === 2) {
+            enemySetup(characterArray[3]);
             $(this).remove();
         }
     }
@@ -234,7 +208,8 @@ playerSetup = function (player) {
     $playerHP.text(player.HP);
     $playerImage.append($playerHP); //doesn't seem to be working
     $("#player").append($playerImage);
-    playerSelected = true;
+    playerCount++;
+    return player;
 }
 
 enemySetup = function (enemy) {
@@ -251,6 +226,9 @@ enemySetup = function (enemy) {
     $enemyHP.text(enemy.HP);
     $enemyImage.append($enemyHP); //doesn't seem to be working
     $("#enemy").append($enemyImage);
+    enemyCount++;
+    return enemy;
+
 
 }
 
