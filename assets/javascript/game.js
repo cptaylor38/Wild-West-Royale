@@ -202,13 +202,6 @@ $(document).on("click", '#attack', function () {
 
     player.AP += 5;
 
-
-
-
-
-
-
-
     //working don't touch/////////////////////////////
     $playerHP = $("<label>").attr({
         'id': 'playerHP'
@@ -231,10 +224,12 @@ $(document).on("click", '#attack', function () {
     }
     /////////////////////////////////////////////
     if (enemy.HP <= 0) {
+        $("#battleSummary").text("Enemy has been defeated.");
         $(".button").removeAttr('disabled');
         $("#enemyHP").text("");
         $("#enemy").empty();
         document.$("#enemyHP").empty();
+
 
 
     }
