@@ -1,6 +1,3 @@
-var player;
-var enemy;
-var $character;
 var playerCount = 0;
 var enemyCount = 0;
 
@@ -13,7 +10,8 @@ var characterArray = [
         HP: 100,
         AP: 10,
         counterAP: 10,
-        imgFile: "assets/images/cowboy.jpg"
+        imgFile: "assets/images/cowboy.jpg",
+        name: "Rascal Jimmy"
 
     },
 
@@ -21,7 +19,8 @@ var characterArray = [
         HP: 110,
         AP: 10,
         counterAP: 10,
-        imgFile: "assets/images/indian.jpg"
+        imgFile: "assets/images/indian.jpg",
+        name: "Teetonka Tallspirit"
 
     },
 
@@ -29,7 +28,8 @@ var characterArray = [
         HP: 120,
         AP: 5,
         counterAP: 5,
-        imgFile: "assets/images/alien.jpg"
+        imgFile: "assets/images/alien.jpg",
+        name: "E.T.P.O"
 
     },
 
@@ -37,7 +37,8 @@ var characterArray = [
         HP: 80,
         AP: 20,
         counterAP: 15,
-        imgFile: "assets/images/crab.jpg"
+        imgFile: "assets/images/crab.jpg",
+        name: "Gangasta Crab"
 
     }
 ]
@@ -195,10 +196,17 @@ $(document).on("click", '#attack', function () {
     $("#playerHP").text("");
     $("#enemyHP").text("");
 
+
     enemy.HP = enemy.HP - player.AP;
     player.HP = player.HP - enemy.counterAP;
 
     player.AP += 5;
+
+
+
+
+
+
 
 
     //working don't touch/////////////////////////////
@@ -231,8 +239,11 @@ $(document).on("click", '#attack', function () {
 
     }
     ///////////////////////////////////////////////
-
+    $("#battleSummary").text(player.name + " hits " + enemy.name + " for " + player.AP + " damage." +
+        "\n" + enemy.name + " hits " + player.name + " for " + enemy.counterAP + " damage.");
 })
+
+
 
 
 

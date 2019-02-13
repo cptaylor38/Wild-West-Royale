@@ -72,6 +72,14 @@ body
     z-index: 100;
 }
 
+#battleSummary
+{
+    display: flex;
+    text-align: center;
+    width: 85%;
+    margin: auto;
+}
+
 
 
 /* #charSelect
