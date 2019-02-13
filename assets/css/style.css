@@ -62,7 +62,14 @@ body
 
 #playerHP
 {
-    position: relative;
+    position: absolute;
+    z-index: 100;
+}
+
+#enemyHP
+{
+    position: absolute;
+    z-index: 100;
 }
 
 

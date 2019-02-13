@@ -1,45 +1,3 @@
-// cowyboy = {
-//     HP: 100,
-//     AP: 5,
-//     counterAP: 15,
-//     imgFile: "assets/images/cowboy.jpg"
-// }
-
-// indian = {
-//     HP: 120,
-//     AP: 5,
-//     counterAP: 15,
-//     imgFile: "assets/images/indian.jpg"
-// }
-
-// alien = {
-//     HP: 150,
-//     AP: 5,
-//     counterAP: 10,
-//     imgFile: "assets/images/alien.jpg"
-// }
-
-// gangastacrab = {
-//     HP: 80,
-//     AP: 5,
-//     counterAP: 25,
-//     imgFile: "assets/images/crab.jpg"
-// }
-
-
-
-// $("#play").on("click", function () {  //calling play function at play button onclick event
-
-//     console.log("hello");
-
-
-// });
-
-
-
-
-
-
 var player;
 var enemy;
 var $character;
@@ -55,32 +13,32 @@ var characterArray = [
         HP: 100,
         AP: 5,
         counterAP: 15,
-        imgFile: "assets/images/cowboy.jpg",
-        isEnemy: false
+        imgFile: "assets/images/cowboy.jpg"
+
     },
 
     indian = {
         HP: 120,
         AP: 5,
         counterAP: 15,
-        imgFile: "assets/images/indian.jpg",
-        isEnemy: false
+        imgFile: "assets/images/indian.jpg"
+
     },
 
     alien = {
         HP: 150,
         AP: 5,
         counterAP: 10,
-        imgFile: "assets/images/alien.jpg",
-        isEnemey: false
+        imgFile: "assets/images/alien.jpg"
+
     },
 
     angrycrab = {
         HP: 80,
         AP: 5,
         counterAP: 25,
-        imgFile: "assets/images/crab.jpg",
-        isEnemy: false
+        imgFile: "assets/images/crab.jpg"
+
     }
 ]
 
@@ -108,9 +66,6 @@ $("#play").on("click", function () {  //calling play function at play button onc
 $(document).on("click", '.button', function () {
     if ($(this).attr("data-index") == 0) {
         if (playerCount === 0) {
-            characterArray[1].isEnemy = true;
-            characterArray[2].isEnemy = true;
-            characterArray[3].isEnemy = true;
             $(this).remove();
             playerSetup(characterArray[0]);
         }
@@ -130,9 +85,6 @@ $(document).on("click", '.button', function () {
     }
     else if ($(this).attr("data-index") == 1) {
         if (playerCount === 0) {
-            characterArray[0].isEnemy = true;
-            characterArray[2].isEnemy = true;
-            characterArray[3].isEnemy = true;
             $(this).remove();
             playerSetup(characterArray[1]);
         }
@@ -151,9 +103,6 @@ $(document).on("click", '.button', function () {
     }
     else if ($(this).attr("data-index") == 2) {
         if (playerCount === 0) {
-            characterArray[0].isEnemy = true;
-            characterArray[1].isEnemy = true;
-            characterArray[3].isEnemy = true;
             $(this).remove();
             playerSetup(characterArray[2]);
         }
@@ -172,9 +121,6 @@ $(document).on("click", '.button', function () {
     }
     else {
         if (playerCount === 0) {
-            characterArray[0].isEnemy = true;
-            characterArray[1].isEnemy = true;
-            characterArray[2].isEnemy = true;
             $(this).remove();
             playerSetup(characterArray[3]);
         }
@@ -194,56 +140,86 @@ $(document).on("click", '.button', function () {
 
 })
 
-playerSetup = function (playerSelected) {
-    $playerHP = $("<label>").attr({
-        'id': 'playerHP'
-    })
+player = playerSetup = function (playerSelected) {
+
     $playerImage = $('<img />').attr({
         'id': 'playerImage',
         'src': playerSelected.imgFile,
         'width': '200px',
         'height': '200px'
     })
-    $playerHP.text(playerSelected.HP);
-    $playerImage.append($playerHP); //doesn't seem to be working
+
     $("#player").append($playerImage);
     playerCount++;
     player = playerSelected;
-
 
     $attack = $('<button>').attr({
         'id': 'attack'
     })
     $attack.text("Attack!");
     $("#battlefield").append($attack);
-
-
-
     return player;
-
 }
 
-enemySetup = function (enemySelected) {
-    $enemyHP = $("<label>").attr({
-        'id': 'enemyHP'
-    })
+enemy = enemySetup = function (enemySelected) {
+
     $enemyImage = $('<img />').attr({
         'id': 'enemyImage',
         'src': enemySelected.imgFile,
         'width': '200px',
         'height': '200px'
     })
-    $enemyHP.text(enemySelected.HP);
-    $enemyImage.append($enemyHP); //doesn't seem to be working
+
     $("#enemy").append($enemyImage);
     enemyCount++;
     enemy = enemySelected;
     return enemy;
-
 }
+
+
+
 
 $(document).on("click", '#attack', function () {
     console.log("attack");
+
+    $("#playerHP").text("");
+    $("#enemyHP").text("");
+
+    enemy.HP = enemy.HP - player.AP;
+    player.HP = player.HP - enemy.counterAP;
+
+    player.AP += 5;
+
+
+    //working don't touch/////////////////////////////
+    $playerHP = $("<label>").attr({
+        'id': 'playerHP'
+    })
+    $playerHP.text(player.HP);
+    $("#playerHP").append($playerHP);
+    //////////////////////////////////////////////
+
+    ////////////////not working correctly//////////
+    $enemyHP = $("<label>").attr({
+        'id': 'enemyHP'
+    })
+    $enemyHP.text(enemy.HP);
+    $("#enemyHP").append($enemyHP);
+    ///////////////////////////////////////////////
+    if (player.HP <= 0) {
+        $("#player").empty();
+        $enemyHP.text(enemy.HP);
+        alert("You have lost the game. Refresh the page to try again.");
+    }
+    /////////////////////////////////////////////
+    if (enemy.HP <= 0) {
+        $("#enemy").empty();
+        $("#enemyHP").empty();
+    }
+    ///////////////////////////////////////////////
+
 })
+
+
 
 
