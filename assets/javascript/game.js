@@ -11,32 +11,32 @@ var enemyCount = 0;
 var characterArray = [
     cowboy = {
         HP: 100,
-        AP: 5,
-        counterAP: 15,
+        AP: 10,
+        counterAP: 10,
         imgFile: "assets/images/cowboy.jpg"
 
     },
 
     indian = {
-        HP: 120,
-        AP: 5,
-        counterAP: 15,
+        HP: 110,
+        AP: 10,
+        counterAP: 10,
         imgFile: "assets/images/indian.jpg"
 
     },
 
     alien = {
-        HP: 150,
+        HP: 120,
         AP: 5,
-        counterAP: 10,
+        counterAP: 5,
         imgFile: "assets/images/alien.jpg"
 
     },
 
     angrycrab = {
         HP: 80,
-        AP: 5,
-        counterAP: 25,
+        AP: 20,
+        counterAP: 15,
         imgFile: "assets/images/crab.jpg"
 
     }
@@ -63,7 +63,7 @@ $("#play").on("click", function () {  //calling play function at play button onc
 })
 
 
-$(document).on("click", '.button', function () {
+$(document).on("click", '.button', '.characterSelection', function () {
     if ($(this).attr("data-index") == 0) {
         if (playerCount === 0) {
             $(this).remove();
@@ -163,6 +163,8 @@ player = playerSetup = function (playerSelected) {
 
 enemy = enemySetup = function (enemySelected) {
 
+    $(".button").prop('disabled', true);
+
     $enemyImage = $('<img />').attr({
         'id': 'enemyImage',
         'src': enemySelected.imgFile,
@@ -173,9 +175,17 @@ enemy = enemySetup = function (enemySelected) {
     $("#enemy").append($enemyImage);
     enemyCount++;
     enemy = enemySelected;
-    return enemy;
-}
 
+    $enemyHP = $("<label>").attr({
+        'id': 'enemyHP'
+    })
+    $enemyHP.text(enemy.HP);
+    $("#enemyHP").append($enemyHP);
+
+
+
+    return enemySelected;
+}
 
 
 
@@ -213,8 +223,12 @@ $(document).on("click", '#attack', function () {
     }
     /////////////////////////////////////////////
     if (enemy.HP <= 0) {
+        $(".button").removeAttr('disabled');
+        $("#enemyHP").text("");
         $("#enemy").empty();
-        $("#enemyHP").empty();
+        document.$("#enemyHP").empty();
+
+
     }
     ///////////////////////////////////////////////
 
