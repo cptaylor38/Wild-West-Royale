@@ -60,11 +60,26 @@ body
     margin-top: 135px;
 }
 
+#player
+{
+    justify-content: center;
+}
+
+#attack
+{
+    display: flex;
+    justify-content: center;    
+    margin-bottom: 20px;
+    border: 5px solid black;
+    background-color: green;
+}
+
 #playerHP
 {
     position: absolute;
     z-index: 100;
 }
+
 
 #enemyHP
 {
@@ -78,6 +93,12 @@ body
     text-align: center;
     width: 50%;
     margin: auto;
+}
+
+#victoryMessage
+{
+    text-align: center;
+    font-size: 54px;
 }
 
 

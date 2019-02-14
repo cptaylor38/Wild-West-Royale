@@ -1,6 +1,7 @@
 var playerCount = 0;
 var enemyCount = 0;
-
+var currentEnemies = 0;
+var enemiesDefeated = 0;
 
 
 
@@ -25,7 +26,7 @@ var characterArray = [
     },
 
     alien = {
-        HP: 120,
+        HP: 130,
         AP: 5,
         counterAP: 5,
         imgFile: "assets/images/alien.jpg",
@@ -62,6 +63,7 @@ $("#play").on("click", function () {  //calling play function at play button onc
     }
     $(this).remove();
 })
+
 
 
 $(document).on("click", '.button', '.characterSelection', function () {
@@ -158,7 +160,7 @@ player = playerSetup = function (playerSelected) {
         'id': 'attack'
     })
     $attack.text("Attack!");
-    $("#battlefield").append($attack);
+    $("#battlefield").prepend($attack);
     return player;
 }
 
@@ -183,12 +185,10 @@ enemy = enemySetup = function (enemySelected) {
     $enemyHP.text(enemy.HP);
     $("#enemyHP").append($enemyHP);
 
-
+    currentEnemies++;
 
     return enemySelected;
 }
-
-
 
 $(document).on("click", '#attack', function () {
     console.log("attack");
@@ -196,47 +196,68 @@ $(document).on("click", '#attack', function () {
     $("#playerHP").text("");
     $("#enemyHP").text("");
 
+    if (currentEnemies === 1) {
+        enemy.HP = enemy.HP - player.AP;
+        player.HP = player.HP - enemy.counterAP;
 
-    enemy.HP = enemy.HP - player.AP;
-    player.HP = player.HP - enemy.counterAP;
+        player.AP += 5;
 
-    player.AP += 5;
+        $playerHP = $("<label>").attr({
+            'id': 'playerHP'
+        })
+        $playerHP.text(player.HP);
+        $("#playerHP").append($playerHP);
 
-    //working don't touch/////////////////////////////
-    $playerHP = $("<label>").attr({
-        'id': 'playerHP'
-    })
-    $playerHP.text(player.HP);
-    $("#playerHP").append($playerHP);
-    //////////////////////////////////////////////
-
-    ////////////////not working correctly//////////
-    $enemyHP = $("<label>").attr({
-        'id': 'enemyHP'
-    })
-    $enemyHP.text(enemy.HP);
-    $("#enemyHP").append($enemyHP);
-    ///////////////////////////////////////////////
-    if (player.HP <= 0) {
-        $("#player").empty();
+        $enemyHP = $("<label>").attr({
+            'id': 'enemyHP'
+        })
         $enemyHP.text(enemy.HP);
-        alert("You have lost the game. Refresh the page to try again.");
+        $("#enemyHP").append($enemyHP);
+
+        if (player.HP < 0) {
+            $("#player").empty();
+            $enemyHP.text(enemy.HP);
+            alert("You have lost the game. Refresh the page to try again.");
+        }
+
+        $("#battleSummary").text(player.name + " hits " + enemy.name + " for " + player.AP + " damage." +
+            "\n" + enemy.name + " hits " + player.name + " for " + enemy.counterAP + " damage.");
+
+        if (enemy.HP < 0) {
+            currentEnemies--;
+            enemiesDefeated++;
+
+            if (enemiesDefeated === 3) {
+                $victoryDance = $('<img />').attr({
+                    'id': 'victoryDance',
+                    'src': "https://media.giphy.com/media/8PefWXtuhMddm/giphy.gif",
+                    'width': '600px',
+                    'height': '500px'
+                })
+
+                $victoryMessage = $('<label>').attr({
+                    'id': 'victoryMessage'
+                })
+
+                $("#battleSummary").remove();
+                $("#charButtons").append($victoryMessage.text("You've defeated them all!"));
+                $("#dialog").append($victoryDance);
+
+
+            }
+
+            $("#battleSummary").text("Enemy has been defeated.");
+            $(".button").removeAttr('disabled');
+            $("#enemyHP").text("");
+            $("#enemy").empty();
+            $("#enemyHP").empty();
+
+
+        }
     }
-    /////////////////////////////////////////////
-    if (enemy.HP <= 0) {
-        $("#battleSummary").text("Enemy has been defeated.");
-        $(".button").removeAttr('disabled');
-        $("#enemyHP").text("");
-        $("#enemy").empty();
-        document.$("#enemyHP").empty();
-
-
-
-    }
-    ///////////////////////////////////////////////
-    $("#battleSummary").text(player.name + " hits " + enemy.name + " for " + player.AP + " damage." +
-        "\n" + enemy.name + " hits " + player.name + " for " + enemy.counterAP + " damage.");
 })
+
+
 
 
 
