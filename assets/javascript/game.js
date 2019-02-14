@@ -182,7 +182,7 @@ enemy = enemySetup = function (enemySelected) {
     $enemyHP = $("<label>").attr({
         'id': 'enemyHP'
     })
-    $enemyHP.text(enemy.HP);
+    $enemyHP.text(enemy.name + ":   " + enemy.HP);
     $("#enemyHP").append($enemyHP);
 
     currentEnemies++;
@@ -205,18 +205,17 @@ $(document).on("click", '#attack', function () {
         $playerHP = $("<label>").attr({
             'id': 'playerHP'
         })
-        $playerHP.text(player.HP);
+        $playerHP.text(player.name + ":    " + player.HP);
         $("#playerHP").append($playerHP);
 
         $enemyHP = $("<label>").attr({
             'id': 'enemyHP'
         })
-        $enemyHP.text(enemy.HP);
+        $enemyHP.text(enemy.name + ":    " + enemy.HP);
         $("#enemyHP").append($enemyHP);
 
         if (player.HP < 0) {
             $("#player").empty();
-            $enemyHP.text(enemy.HP);
             alert("You have lost the game. Refresh the page to try again.");
         }
 
