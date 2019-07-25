@@ -1,4 +1,4 @@
-# Wild West Royal
+# Wild West Royale
 
 Small object-oriented javascript application of a Battle Royal-style text-fighter game. Leaving as a future project idea to integrate with React or as a React/Angular learning exercise.
 
